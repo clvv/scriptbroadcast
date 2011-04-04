@@ -1,0 +1,108 @@
+#!/usr/bin/env node
+
+var net = require('net');
+var fs = require('fs');
+var util = require('util');
+var Buffer = require('buffer').Buffer;
+
+if ( process.argv[2] ) {
+    if ( process.argv[2].match(/-h|--help/) ) {
+        console.log('USAGE:');
+        console.log('scriptbroadcast [port] [timing file] [typescript file]');
+        process.exit();
+    } else
+        var port = parseInt( process.argv[2] );
+
+    if ( process.argv[3] )
+        var timingFile = process.argv[3];
+    else
+        var timingFile = 'timing';
+
+    if ( process.argv[4] )
+        var typeScriptFile = process.argv[4];
+    else
+        var typeScriptFile = 'typescript';
+} else {
+    var port = 5000;
+    var timingFile = 'timing';
+    var typeScriptFile = 'typescript';
+}
+
+var timeline = [];
+
+fs.readFile(timingFile, function (err, data) {
+
+    if (err) {
+        throw err;
+        process.exit();
+    }
+
+    data = data.toString('ascii').split(/ |\n/);
+
+    for (var i = 0; i < data.length / 2 - 1; i++ ) {
+        timeline[i] = [ parseFloat(data[i*2]) * 1000, parseInt(data[i*2+1]) ];
+    };
+
+    fs.readFile(typeScriptFile, function (err, scriptBuffer) {
+
+        if (err) {
+            throw err;
+            process.exit();
+        }
+
+        // Initialize slicedBytes, ignore the first line
+        var slicedBytes = 0;
+        while ( scriptBuffer[slicedBytes] !== 0x0a )
+            slicedBytes++;
+        slicedBytes++;
+
+        timeline.forEach(function (entry) {
+            entry[2] = scriptBuffer.slice(slicedBytes, slicedBytes + entry[1]);
+            slicedBytes += entry[1];
+        });
+
+        if ( scriptBuffer.length !== slicedBytes )
+            console.log('Something went wrong when slicing the file!');
+
+        //console.log('Timeline size: ' + timeline.length);
+        //console.log('scriptBuffer size: ' + scriptBuffer.length);
+        //console.log('slicedBytes: ' + slicedBytes)
+    });
+});
+
+var server = net.createServer(function (c) {
+    console.log('New client connected!');
+    scriptReplay(c);
+});
+
+var scriptReplay = function (stream, id) {
+
+    if ( typeof id === 'undefined' ) id = -1; // Initialize id on first call
+
+    if (id >= 0) {
+
+        if ( stream.writable )
+            stream.write(timeline[id][2]);
+        else {
+            console.log('Lost a client!');
+            return;
+        }
+
+        //console.log('Sent: ' + timeline[id][1]);
+    }
+
+    id++;
+
+    if ( id < timeline.length) {
+        setTimeout(scriptReplay, timeline[id][0], stream, id);
+        //console.log('Wait: ' + timeline[id][0]);
+    } else {
+        console.log('Playback ended!');
+        stream.end();
+    }
+}
+
+server.listen(port);
+console.log('Broadcasting ' + typeScriptFile + ' on port ' + port + '!');
+
+// vim: se ft=javascript:

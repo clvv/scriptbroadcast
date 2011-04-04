@@ -1,0 +1,19 @@
+{
+  "name": "scriptbroadcast",
+  "description": "Broadcast recorded typescripts(shell sessions)",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/clvv/scriptbroadcast.git"
+  },
+  "author": "Wei Dai <x@wei23.net>",
+  "directories": {
+    "lib": "."
+  },
+  "bin": {
+    "scriptbroadcast": "./bin/scriptbroadcast"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  }
+}
