@@ -24,7 +24,7 @@ parameters:
 
     scriptbroadcast
 
-Run the following command elsewhere will play your typescript:
+Run the following netcat command elsewhere will play your typescript:
 
     nc yourip 5000
 
@@ -34,7 +34,7 @@ SEE ALSO
 
 `script(1)`, `scriptreplay(1)`
 
-scriptreplay is inspired by [my CommandLineFu
+scriptbroadcast is inspired by [my CommandLineFu
 command](http://www.commandlinefu.com/commands/view/6788) and the comments.
 
 LICENSE
