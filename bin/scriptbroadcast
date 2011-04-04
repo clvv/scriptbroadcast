@@ -52,9 +52,7 @@ fs.readFile(timingFile, function (err, data) {
 
         // Initialize slicedBytes, ignore the first line
         var slicedBytes = 0;
-        while ( scriptBuffer[slicedBytes] !== 0x0a )
-            slicedBytes++;
-        slicedBytes++;
+        while ( scriptBuffer[slicedBytes++] !== 0x0a );
 
         timeline.forEach(function (entry) {
             entry[2] = scriptBuffer.slice(slicedBytes, slicedBytes + entry[1]);
