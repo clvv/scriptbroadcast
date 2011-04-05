@@ -47,4 +47,4 @@ command](http://www.commandlinefu.com/commands/view/6788) and the comments.
 
 LICENSE
 =======
-scriptbraodcast is licensed under "MIT/X11" license, see LICENSE file.
+scriptbroadcast is licensed under "MIT/X11" license, see LICENSE file.
