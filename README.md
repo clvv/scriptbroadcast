@@ -4,6 +4,14 @@ SCRIPTBROADCAST
 scriptboradcast broadcasts typescripts recorded with `script` command to any
 numbers of recipients.
 
+DEMO
+====
+
+    nc wei23.net 5000
+
+First make sure you are using a normal sized 80*24 terminal, then run the above
+netcat command, enjoy.
+
 SYNOPSIS
 ========
 
