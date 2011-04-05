@@ -75,7 +75,8 @@ var server = net.createServer(function (c) {
 
 var scriptReplay = function (stream, id) {
 
-    if ( typeof id === 'undefined' ) id = -1; // Initialize id on first call
+    if ( typeof id === 'undefined' )
+        id = -1; // Initialize id on first call
 
     if (id >= 0) {
 
