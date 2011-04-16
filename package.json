@@ -1,19 +1,22 @@
 {
   "name": "scriptbroadcast",
   "description": "Broadcast recorded typescripts(shell sessions)",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/clvv/scriptbroadcast.git"
   },
   "author": "Wei Dai <x@wei23.net>",
   "directories": {
-    "lib": "."
+    "lib": "./lib/"
   },
   "bin": {
     "scriptbroadcast": "./bin/scriptbroadcast"
   },
   "engines": {
     "node": ">= 0.4.0"
-  }
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "main": "lib/scriptBroadcast.js"
 }
