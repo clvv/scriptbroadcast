@@ -24,10 +24,10 @@ Please make sure that npm's bin directory is exported in path.
 SYNOPSIS
 --------
 
-    scriptbroadcast [port] [timing file] [typescript file]
+    scriptbroadcast [port [timing [typescript [divisor]]]]
 
-5000 is the default port, timing is the default timing file and typescript is
-the default typescript file.
+5000 is the default port, timing is the default timing file, typescript is
+the default typescript file and the default divisor is 1.
 
 USAGE
 -----
