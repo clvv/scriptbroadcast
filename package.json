@@ -1,7 +1,7 @@
 {
   "name": "scriptbroadcast",
   "description": "Broadcast recorded typescripts(shell sessions)",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/clvv/scriptbroadcast.git"
