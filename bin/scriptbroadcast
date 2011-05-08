@@ -10,23 +10,30 @@ if ( process.argv[2] ) {
         console.log('USAGE:');
         console.log('scriptbroadcast [port [timing [typescript [divisor]]]]');
         process.exit();
-    } else
-        var port = parseInt( process.argv[2] );
+    } else {
+        var port = parseInt( process.argv[2] , 10 );
+    }
 
-    if ( process.argv[3] )
+    if ( process.argv[3] ) {
         var timingFile = process.argv[3];
-    else
+    }
+    else {
         var timingFile = 'timing';
+    }
 
-    if ( process.argv[4] )
+    if ( process.argv[4] ) {
         var typeScriptFile = process.argv[4];
-    else
+    }
+    else {
         var typeScriptFile = 'typescript';
+    }
 
-    if ( process.argv[5] )
+    if ( process.argv[5] ) {
         var divisor = process.argv[5];
-    else
+    }
+    else {
         var divisor = 1;
+    }
 } else {
     var port = 5000;
     var timingFile = 'timing';

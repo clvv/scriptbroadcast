@@ -1,4 +1,4 @@
-fs = require 'fs'
+fs       = require 'fs'
 {Buffer} = require 'buffer'
 
 
@@ -27,15 +27,15 @@ exports.readTimeLine = (timingFile, typeScriptFile, callback) ->
 
             # Slice scriptBuffer to desired chuncks
             timeline.forEach (entry) ->
-                entry.data = scriptBuffer.slice \
-                    slicedBytes, slicedBytes + entry.bytes
+                entry.data = scriptBuffer.slice slicedBytes,
+                    slicedBytes + entry.bytes
                 slicedBytes += entry.bytes
 
             # In case anything goes wrong
             if scriptBuffer.length isnt slicedBytes
                 console.log 'Something went wrong when slicing the file!'
-                console.log 'scriptBuffer size: ' + scriptBuffer.length
-                console.log 'slicedBytes: ' + slicedBytes
+                console.log "scriptBuffer size: #{scriptBuffer.length}"
+                console.log "slicedBytes: #{slicedBytes}"
 
             callback timeline
 
@@ -56,7 +56,7 @@ exports.createReplayFunction = (timeline, divisor = 1) ->
         # If not, then set up the timeout for the next action
         # If yes, then close the connection
         if ++id < timeline.length
-            setTimeout arguments.callee, \
+            setTimeout arguments.callee,
                 timeline[id].delay / divisor, stream, id
         else
             console.log 'playback ended!'
